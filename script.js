@@ -22,10 +22,6 @@
   // --- DOM Elements ---
   const canvas = document.getElementById('heroCanvas');
   const ctx = canvas.getContext('2d', { alpha: false });
-  const preloader = document.getElementById('preloader');
-  const progressFill = document.getElementById('progressFill');
-  const progressText = document.getElementById('progressText');
-  const progressFrames = document.getElementById('progressFrames');
   const navbar = document.getElementById('navbar');
   const chapterBlocks = document.querySelectorAll('.chapter-block');
   const currentStep = document.getElementById('currentStep');
@@ -40,8 +36,6 @@
   // --- Animation State ---
   const frameImages = new Array(TOTAL_FRAMES);
   const frameLoadedStatus = new Array(TOTAL_FRAMES).fill(false);
-  let loadedCount = 0;
-  let isInitialLoadComplete = false;
   let targetFrame = 0;
   let currentFrame = 0;
   let lastDrawnIndex = -1;
@@ -76,66 +70,31 @@
 
   // --- Preloading System ---
   function preloadAllFrames() {
-    return new Promise((resolve) => {
-      frameMetadata.forEach((meta) => {
-        const img = new Image();
-        let hasRetried = false;
+    frameMetadata.forEach((meta) => {
+      const img = new Image();
+      let hasRetried = false;
 
-        img.onload = () => {
-          frameLoadedStatus[meta.index] = true;
-          frameImages[meta.index] = img;
-          loadedCount++;
+      img.onload = () => {
+        frameLoadedStatus[meta.index] = true;
+        frameImages[meta.index] = img;
 
-          updatePreloadUI(loadedCount, TOTAL_FRAMES);
+        if (meta.index === 0 && lastDrawnIndex === -1) {
+          renderFrame(0);
+        }
+      };
 
-          // Render first frame as soon as frame 0 is ready
-          if (meta.index === 0 && lastDrawnIndex === -1) {
-            renderFrame(0);
-          }
+      img.onerror = () => {
+        if (!hasRetried && meta.fallbackUrl) {
+          hasRetried = true;
+          img.src = meta.fallbackUrl;
+          return;
+        }
+        console.warn(`Could not load frame ${meta.index}: ${meta.primaryUrl}`);
+        frameLoadedStatus[meta.index] = false;
+      };
 
-          if (loadedCount >= TOTAL_FRAMES) {
-            finishPreloading();
-            resolve();
-          }
-        };
-
-        img.onerror = () => {
-          if (!hasRetried && meta.fallbackUrl) {
-            hasRetried = true;
-            img.src = meta.fallbackUrl;
-            return;
-          }
-          console.warn(`Could not load frame ${meta.index}: ${meta.primaryUrl}`);
-          frameLoadedStatus[meta.index] = false;
-          loadedCount++;
-          updatePreloadUI(loadedCount, TOTAL_FRAMES);
-
-          if (loadedCount >= TOTAL_FRAMES) {
-            finishPreloading();
-            resolve();
-          }
-        };
-
-        img.src = meta.primaryUrl;
-      });
+      img.src = meta.primaryUrl;
     });
-  }
-
-  function updatePreloadUI(loaded, total) {
-    const percent = Math.min(100, Math.floor((loaded / total) * 100));
-    if (progressFill) progressFill.style.width = `${percent}%`;
-    if (progressText) progressText.textContent = `${percent}%`;
-    if (progressFrames) progressFrames.textContent = `Loading ${loaded} / ${total}`;
-  }
-
-  function finishPreloading() {
-    if (isInitialLoadComplete) return;
-    isInitialLoadComplete = true;
-
-    setTimeout(() => {
-      if (preloader) preloader.classList.add('fade-out');
-      renderFrame(Math.round(currentFrame));
-    }, 200);
   }
 
   // --- Canvas Resizing & Centering ---
