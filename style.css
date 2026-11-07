@@ -1,0 +1,645 @@
+/* ==========================================================================
+   AirPods Max — Apple-Inspired Minimalist Product Hero
+   Typography: Outfit | Colors: Black, Off-White (#E4E3DC), Brand Orange Accent
+   ========================================================================== */
+
+:root {
+  --bg-studio: #E4E3DC;
+  --bg-navbar: rgba(228, 227, 220, 0.78);
+  --bg-pill: rgba(0, 0, 0, 0.04);
+  --bg-pill-hover: rgba(0, 0, 0, 0.08);
+  --border-subtle: rgba(0, 0, 0, 0.08);
+  --border-hover: rgba(0, 0, 0, 0.2);
+  
+  --text-primary: #111111;
+  --text-secondary: #626268;
+  --text-tertiary: #8e8e93;
+  --accent-orange: #FF5A00;
+  --accent-orange-glow: rgba(255, 90, 0, 0.3);
+
+  --font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'SF Mono', Consolas, Monaco, monospace;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background-color: var(--bg-studio);
+  scroll-behavior: auto;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--bg-studio);
+  color: var(--text-primary);
+  font-family: var(--font-family);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* Custom Minimal Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.35);
+}
+
+/* ==========================================================================
+   Minimal Preloader
+   ========================================================================== */
+.preloader {
+  position: fixed;
+  inset: 0;
+  background: var(--bg-studio);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.5s;
+}
+
+.preloader.fade-out {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.preloader-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  max-width: 280px;
+  width: 80%;
+  text-align: center;
+}
+
+.brand-logo-small {
+  width: 32px;
+  height: 32px;
+  opacity: 0.9;
+}
+
+.preloader-progress-bar {
+  width: 100%;
+  height: 2px;
+  background: rgba(0, 0, 0, 0.08);
+  border-radius: 999px;
+  overflow: hidden;
+  position: relative;
+}
+
+.preloader-progress-fill {
+  width: 0%;
+  height: 100%;
+  background: var(--accent-orange);
+  border-radius: 999px;
+  transition: width 0.15s ease-out;
+}
+
+.preloader-stats {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  letter-spacing: 0.04em;
+}
+
+.preloader-percent {
+  color: var(--accent-orange);
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   Full Viewport Product Animation Canvas
+   (Centered horizontally & vertically with ample whitespace)
+   ========================================================================== */
+.canvas-viewport {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  pointer-events: none;
+  background-color: var(--bg-studio);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+#heroCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ==========================================================================
+   Minimal Auto-Hiding Navigation Bar
+   (Hides on scroll down, reappears on scroll up)
+   ========================================================================== */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 4.5vw;
+  background: var(--bg-navbar);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid var(--border-subtle);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+  transform: translateY(0);
+}
+
+.navbar.nav-hidden {
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+}
+
+.brand-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--text-primary);
+  opacity: 0.95;
+  transition: opacity 0.2s ease;
+}
+
+.brand-link:hover {
+  opacity: 0.7;
+}
+
+.apple-logo-icon {
+  width: 17px;
+  height: 20px;
+}
+
+.nav-center {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.nav-item {
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+  letter-spacing: -0.01em;
+  transition: color 0.2s ease;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.nav-item:hover {
+  color: var(--text-primary);
+}
+
+.nav-item.active {
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+.nav-active-dot {
+  width: 4px;
+  height: 4px;
+  background: var(--accent-orange);
+  border-radius: 50%;
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.nav-icon-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.85;
+  transition: opacity 0.2s ease;
+}
+
+.nav-icon-btn:hover {
+  opacity: 1;
+}
+
+.user-pill-avatar {
+  background: #111111;
+  color: #ffffff;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 3px 8px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   Editorial Content (Strictly Left & Right Edges)
+   Central area has a wide clearance of generous whitespace
+   ========================================================================== */
+.editorial-container {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chapter-block {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 4.5vw;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(16px);
+  pointer-events: none;
+  will-change: opacity, transform;
+}
+
+.chapter-block.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Left Edge Content */
+.edge-left {
+  max-width: 320px;
+  width: 100%;
+  text-align: left;
+  pointer-events: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.dot-orange {
+  width: 6px;
+  height: 6px;
+  background: var(--accent-orange);
+  border-radius: 50%;
+  box-shadow: 0 0 6px var(--accent-orange-glow);
+}
+
+.accent-orange {
+  color: var(--accent-orange);
+  font-weight: inherit;
+}
+
+.chapter-title {
+  font-size: clamp(2rem, 3.2vw, 3.1rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+}
+
+.chapter-desc {
+  font-size: 0.92rem;
+  font-weight: 400;
+  line-height: 1.62;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+}
+
+.badge-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  background: var(--bg-pill);
+  border: 1px solid var(--border-subtle);
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+/* Right Edge Content */
+.edge-right {
+  max-width: 270px;
+  width: 100%;
+  text-align: right;
+  pointer-events: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.stat-highlight {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.stat-number {
+  font-size: clamp(2.4rem, 3.8vw, 3.6rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+  margin-bottom: 6px;
+}
+
+.stat-caption {
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+/* ==========================================================================
+   Apple-Inspired Minimal Bottom Bar (Clear of central product)
+   ========================================================================== */
+.bottom-bar {
+  position: fixed;
+  bottom: 24px;
+  left: 0;
+  width: 100%;
+  padding: 0 4.5vw;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  pointer-events: auto;
+}
+
+/* Bottom Left: Play Action */
+.bottom-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 200px;
+}
+
+.circle-btn-play {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--bg-pill);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.circle-btn-play:hover {
+  background: #ffffff;
+  border-color: var(--border-hover);
+  transform: scale(1.05);
+}
+
+.play-icon {
+  font-size: 0.75rem;
+  margin-left: 2px;
+}
+
+.btn-caption {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Bottom Center: Step counter, Pill, Arrow buttons */
+.bottom-center {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.step-indicator {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-family);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  min-width: 48px;
+}
+
+.step-slash {
+  color: var(--text-tertiary);
+  font-weight: 400;
+}
+
+.total-steps {
+  color: var(--text-tertiary);
+}
+
+.pill-btn-secondary {
+  background: var(--bg-pill);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  font-family: var(--font-family);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pill-btn-secondary:hover {
+  background: #ffffff;
+  border-color: var(--border-hover);
+  transform: translateY(-1px);
+}
+
+.step-arrows {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.circle-btn-nav {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--bg-pill);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.circle-btn-nav:hover {
+  background: #ffffff;
+  border-color: var(--border-hover);
+  transform: scale(1.05);
+}
+
+/* Bottom Right: Buy Button */
+.bottom-right {
+  display: flex;
+  justify-content: flex-end;
+  min-width: 200px;
+}
+
+.pill-btn-primary {
+  background: #111111;
+  color: #ffffff;
+  border: 1px solid transparent;
+  font-family: var(--font-family);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  padding: 9px 24px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+}
+
+.pill-btn-primary:hover {
+  background: #222224;
+  border-color: var(--accent-orange);
+  box-shadow: 0 6px 20px var(--accent-orange-glow);
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   Scroll Height Track (Controls native scroll length)
+   ========================================================================== */
+.scroll-track {
+  width: 100%;
+  height: 750vh;
+  position: relative;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   Responsive Adaptations
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .nav-center {
+    gap: 20px;
+  }
+  .edge-left {
+    max-width: 260px;
+  }
+  .edge-right {
+    max-width: 220px;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    height: 52px;
+    padding: 0 20px;
+  }
+  .nav-center {
+    display: none;
+  }
+  .chapter-block {
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 70px 24px 90px 24px;
+  }
+  .edge-left, .edge-right {
+    max-width: 100%;
+    text-align: center;
+    align-items: center;
+  }
+  .stat-highlight {
+    align-items: center;
+  }
+  .bottom-bar {
+    padding: 0 20px;
+    bottom: 16px;
+  }
+  .bottom-left {
+    min-width: auto;
+  }
+  .btn-caption {
+    display: none;
+  }
+  .bottom-right {
+    min-width: auto;
+  }
+}

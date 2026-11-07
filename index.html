@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AirPods Max — Apple Inspiration</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Minimal Preloader -->
+  <div id="preloader" class="preloader">
+    <div class="preloader-inner">
+      <svg class="brand-logo-small" viewBox="0 0 170 170" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.69-3.08-7.7-7.93-12.04-14.56-6.19-9.5-11.07-20.1-14.65-31.81-3.58-11.71-5.37-23.01-5.37-33.91 0-14.36 3.63-26.4 10.89-36.14 7.26-9.74 16.48-14.76 27.67-15.06 4.35 0 9.4 1.25 15.15 3.75 5.76 2.5 9.77 3.86 12.04 4.09 1.77-.32 5.86-1.74 12.28-4.26 6.42-2.52 11.83-3.69 16.23-3.52 9.04.54 16.89 3.52 23.55 8.95 6.66 5.43 11.39 12.43 14.2 21-8.08 4.88-12.03 11.66-11.85 20.35.18 7.37 3.01 13.62 8.49 18.75 5.48 5.13 12.16 8.16 20.04 9.1-1.9 6.08-4.38 12.41-7.44 18.99zM119.22 33.72c0-7.39 2.74-14.32 8.23-20.79 5.49-6.47 12.2-10.74 20.14-12.81.42 2.14.63 4.29.63 6.45 0 7.39-2.82 14.35-8.46 20.89-5.64 6.54-12.61 10.74-20.91 12.6-.11-2.14-.17-4.25-.17-6.34z" fill="#111111"/>
+      </svg>
+      <div class="preloader-progress-bar">
+        <div id="progressFill" class="preloader-progress-fill"></div>
+      </div>
+      <div class="preloader-stats">
+        <span id="progressText" class="preloader-percent">0%</span>
+        <span id="progressFrames" class="preloader-counter">Loading 196 Frames</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Background Product Animation Canvas (Perfectly centered, ample whitespace) -->
+  <div class="canvas-viewport">
+    <canvas id="heroCanvas"></canvas>
+  </div>
+
+  <!-- Minimal Auto-Hiding Navbar (Hides on scroll down, reappears on scroll up) -->
+  <header class="navbar" id="navbar">
+    <div class="nav-left">
+      <a href="#" class="brand-link" aria-label="Brand Home">
+        <svg class="apple-logo-icon" viewBox="0 0 170 170" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.69-3.08-7.7-7.93-12.04-14.56-6.19-9.5-11.07-20.1-14.65-31.81-3.58-11.71-5.37-23.01-5.37-33.91 0-14.36 3.63-26.4 10.89-36.14 7.26-9.74 16.48-14.76 27.67-15.06 4.35 0 9.4 1.25 15.15 3.75 5.76 2.5 9.77 3.86 12.04 4.09 1.77-.32 5.86-1.74 12.28-4.26 6.42-2.52 11.83-3.69 16.23-3.52 9.04.54 16.89 3.52 23.55 8.95 6.66 5.43 11.39 12.43 14.2 21-8.08 4.88-12.03 11.66-11.85 20.35.18 7.37 3.01 13.62 8.49 18.75 5.48 5.13 12.16 8.16 20.04 9.1-1.9 6.08-4.38 12.41-7.44 18.99zM119.22 33.72c0-7.39 2.74-14.32 8.23-20.79 5.49-6.47 12.2-10.74 20.14-12.81.42 2.14.63 4.29.63 6.45 0 7.39-2.82 14.35-8.46 20.89-5.64 6.54-12.61 10.74-20.91 12.6-.11-2.14-.17-4.25-.17-6.34z" fill="#111111"/>
+        </svg>
+      </a>
+    </div>
+
+    <nav class="nav-center">
+      <a href="#" class="nav-item">AirPods</a>
+      <a href="#" class="nav-item">AirPods Pro</a>
+      <a href="#" class="nav-item active">AirPods Max<span class="nav-active-dot"></span></a>
+      <a href="#" class="nav-item">Beats</a>
+      <a href="#" class="nav-item">Compare</a>
+    </nav>
+
+    <div class="nav-right">
+      <button class="nav-icon-btn" aria-label="Shopping Bag">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <path d="M16 10a4 4 0 0 1-8 0"></path>
+        </svg>
+      </button>
+      <div class="user-pill-avatar">
+        <span>YDI</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Left & Right Edge Storytelling Content (Center area kept 100% empty) -->
+  <main class="editorial-container" id="editorialContainer">
+    
+    <!-- Chapter 1: The Icon Overview (Frames 0 - 38) -->
+    <article class="chapter-block active" id="chapter1" data-start="0" data-peak="16" data-end="38">
+      <div class="edge-left">
+        <span class="eyebrow"><span class="dot-orange"></span>OVERVIEW</span>
+        <h1 class="chapter-title">Sculpted for<br>pure sound.</h1>
+        <p class="chapter-desc">An uncompromising acoustic seal crafted with bespoke materials for unprecedented fidelity and spatial depth.</p>
+        <div class="badge-pill">
+          <span class="badge-text">CNC Anodized Aluminum</span>
+        </div>
+      </div>
+      <div class="edge-right">
+        <div class="stat-highlight">
+          <span class="stat-number">0.01<span class="accent-orange">%</span></span>
+          <span class="stat-label">Total Harmonic Distortion</span>
+          <p class="stat-caption">Zero-resonance cavity prevents colorization across the audible spectrum.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- Chapter 2: Phase 01 Frame_1 - Acoustic Architecture (Frames 39 - 85) -->
+    <article class="chapter-block" id="chapter2" data-start="39" data-peak="62" data-end="85">
+      <div class="edge-left">
+        <span class="eyebrow"><span class="dot-orange"></span>PHASE 01 • FRAME_1</span>
+        <h2 class="chapter-title">Geometry in<br><span class="accent-orange">pure motion</span>.</h2>
+        <p class="chapter-desc">Every radius, chamber curve, and mesh aperture is aerodynamically tuned to equalize internal pressure.</p>
+        <div class="badge-pill">
+          <span class="badge-text">Acoustic Mesh Baffle</span>
+        </div>
+      </div>
+      <div class="edge-right">
+        <div class="stat-highlight">
+          <span class="stat-number">12.4 <span class="accent-orange">cm³</span></span>
+          <span class="stat-label">Acoustic Chamber</span>
+          <p class="stat-caption">Optimized internal volume creates effortless bass extension to 5Hz.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- Chapter 3: Phase 02 Frame_2 - Beryllium Transducer (Frames 86 - 135) -->
+    <article class="chapter-block" id="chapter3" data-start="86" data-peak="110" data-end="135">
+      <div class="edge-left">
+        <span class="eyebrow"><span class="dot-orange"></span>PHASE 02 • FRAME_2</span>
+        <h2 class="chapter-title">Beryllium core<br><span class="accent-orange">precision</span>.</h2>
+        <p class="chapter-desc">Vapor-deposited ultra-thin diaphragm powered by dual neodymium ring magnets for lightning transient speed.</p>
+        <div class="badge-pill">
+          <span class="badge-text">5Hz – 45,000Hz Ultra-Wide</span>
+        </div>
+      </div>
+      <div class="edge-right">
+        <div class="stat-highlight">
+          <span class="stat-number">1.8 <span class="accent-orange">T</span></span>
+          <span class="stat-label">Magnetic Flux Density</span>
+          <p class="stat-caption">Complete motor control delivers zero distortion even at peak volume.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- Chapter 4: Phase 03 Frame_3 - Active Silence & DSP (Frames 136 - 170) -->
+    <article class="chapter-block" id="chapter4" data-start="136" data-peak="154" data-end="170">
+      <div class="edge-left">
+        <span class="eyebrow"><span class="dot-orange"></span>PHASE 03 • FRAME_3</span>
+        <h2 class="chapter-title">Silence,<br><span class="accent-orange">calibrated</span>.</h2>
+        <p class="chapter-desc">Eight hybrid microphones and dual audio processors calibrate ambient isolation 48,000 times per second.</p>
+        <div class="badge-pill">
+          <span class="badge-text">Lossless 24-bit / 96kHz</span>
+        </div>
+      </div>
+      <div class="edge-right">
+        <div class="stat-highlight">
+          <span class="stat-number">-44 <span class="accent-orange">dB</span></span>
+          <span class="stat-label">Active Noise Cancellation</span>
+          <p class="stat-caption">Continuous computational adaptation produces true transparent stillness.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- Chapter 5: Finale Assembly (Frames 171 - 195) -->
+    <article class="chapter-block" id="chapter5" data-start="171" data-peak="188" data-end="196">
+      <div class="edge-left">
+        <span class="eyebrow"><span class="dot-orange"></span>DEFINITIVE MASTER</span>
+        <h2 class="chapter-title">Hear everything.<br><span class="accent-orange">Feel nothing</span>.</h2>
+        <p class="chapter-desc">60 hours of uncompressed playback. Handcrafted memory foam and balanced canopy suspension.</p>
+        <div class="badge-pill">
+          <span class="badge-text">60 Hours Battery Life</span>
+        </div>
+      </div>
+      <div class="edge-right">
+        <div class="stat-highlight">
+          <span class="stat-number">$399</span>
+          <span class="stat-label">AirPods Max Special Edition</span>
+          <p class="stat-caption">Free expedited delivery &amp; 30-day trial included.</p>
+        </div>
+      </div>
+    </article>
+
+  </main>
+
+  <!-- Apple-Inspired Minimal Bottom Bar (Clear of central product) -->
+  <footer class="bottom-bar" id="bottomBar">
+    <!-- Bottom Left: Play Video / Auto-Play Action -->
+    <div class="bottom-left">
+      <button class="circle-btn-play" id="btnTogglePlay" aria-label="Play animation">
+        <span class="play-icon" id="playIcon">▶</span>
+      </button>
+      <span class="btn-caption" id="playCaption">Play animation</span>
+    </div>
+
+    <!-- Bottom Center: Step indicator, pill, arrow step buttons -->
+    <div class="bottom-center">
+      <div class="step-indicator">
+        <span class="current-step" id="currentStep">01</span>
+        <span class="step-slash">/</span>
+        <span class="total-steps">05</span>
+      </div>
+      <button class="pill-btn-secondary" id="btnMoreDetails">
+        More Product
+      </button>
+      <div class="step-arrows">
+        <button class="circle-btn-nav" id="btnPrevChapter" aria-label="Previous Chapter">‹</button>
+        <button class="circle-btn-nav" id="btnNextChapter" aria-label="Next Chapter">›</button>
+      </div>
+    </div>
+
+    <!-- Bottom Right: Buy Product Button with subtle orange accent -->
+    <div class="bottom-right">
+      <button class="pill-btn-primary" id="btnBuyProduct">
+        Buy Product
+      </button>
+    </div>
+  </footer>
+
+  <!-- Scroll Height Track to Drive 196 Frames -->
+  <div class="scroll-track" id="scrollTrack"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
